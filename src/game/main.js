@@ -12,6 +12,9 @@ const config = {
     height: 768,
     parent: 'game-container',
     backgroundColor: '#028af8',
+    dom: {
+        createContainer: true
+    },
     scale: {
         mode: Scale.FIT,
         autoCenter: Scale.CENTER_BOTH
