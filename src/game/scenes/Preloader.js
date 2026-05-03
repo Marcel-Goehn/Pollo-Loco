@@ -9,7 +9,7 @@ export class Preloader extends Scene
 
     init ()
     {
-        this.add.image(0, 0, 'background');
+        this.add.image(960, 540, 'background');
     }
 
     preload ()
@@ -27,12 +27,12 @@ export class Preloader extends Scene
         this.load.image('first-layer', 'background-layers/first-layer.png');
         this.load.image('second-layer', 'background-layers/second-layer.png');
         this.load.image('third-layer', 'background-layers/third-layer.png');
+        this.load.image('platform', 'background-layers/platform.png');
 
         // Salsa Bottle
         this.load.image('salsa-bottle-on-ground', 'bottle/1_salsa_bottle_on_ground.png');
         this.load.image('salsa-bottle', 'bottle/salsa_bottle.png');
-        this.load.spritesheet('throwing-bottle', 'bottle/throwing-bottle_sprite_sheet.png', {frameWidth: 400, frameHeight: 400});
-        this.load.spritesheet('exploding-bottle', 'bottle/exploding-bottle_sprite_sheet.png', {frameWidth: 524, frameHeight: 400});
+        this.load.spritesheet('throwing-bottle', 'bottle/spritesheet_bottle.png', {frameWidth: 128, frameHeight: 128});
 
         // Collectable Coin
         this.load.image('coin', 'coin/coin_2.png');
@@ -45,27 +45,16 @@ export class Preloader extends Scene
         this.load.image('tabasco-key', 'controls/tabasco.png');
 
         // Endboss
-        this.load.spritesheet('boss-walk', 'endboss/boss-walk_sprite_sheet.png', {frameWidth: 1045, frameHeight: 1217});
-        this.load.spritesheet('boss-alert', 'endboss/boss-alert_sprite_sheet.png', {frameWidth: 1045, frameHeight: 1217});
-        this.load.spritesheet('boss-attack', 'endboss/boss-attack_sprite_sheet.png', {frameWidth: 1045, frameHeight: 1217});
-        this.load.spritesheet('boss-hurt', 'endboss/boss-hurt_sprite_sheet.png', {frameWidth: 1045, frameHeight: 1217});
-        this.load.spritesheet('boss-dead', 'endboss/boss-dead_sprite_sheet.png', {frameWidth: 1045, frameHeight: 1217});
+        this.load.spritesheet('boss', 'endboss/spritesheet_endboss.png', {frameWidth: 1045, frameHeight: 1217});
 
         // Normal enemy chicken
-        this.load.spritesheet('chicken-normal-walk', 'enemy_chicken/chicken-walk_sprite_sheet.png', {frameWidth: 248, frameHeight: 243});
-        this.load.image('normal-chicken-dead', 'enemy_chicken/dead.png');
+        this.load.spritesheet('chicken-normal', 'enemy_chicken/spritesheet_chicken.png', {frameWidth: 248, frameHeight: 243});
 
         // Small enemy chicken
-        this.load.spritesheet('small-chicken-walk', 'enemy_chicken_small/small-chicken-walk_sprite_sheet.png', {frameWidth: 236, frameHeight: 210});
-        this.load.image('small-chicken-dead', 'enemy_chicken_small/dead.png');
+        this.load.spritesheet('small-chicken', 'enemy_chicken_small/spritesheet_chicken_small.png', {frameWidth: 236, frameHeight: 210});
 
         // Playable Character
-        this.load.spritesheet('pepe-idle', 'pepe/pepe-idle_sprite_sheet.png', {frameWidth: 610, frameHeight: 1200});
-        this.load.spritesheet('pepe-long-idle', 'pepe/pepe-long-idle_sprite_sheet.png', {frameWidth: 610, frameHeight: 1200});
-        this.load.spritesheet('pepe-walk', 'pepe/pepe-walk_sprite_sheet.png', {frameWidth: 610, frameHeight: 1200});
-        this.load.spritesheet('pepe-jump', 'pepe/pepe-jump_sprite_sheet.png', {frameWidth: 610, frameHeight: 1200});
-        this.load.spritesheet('pepe-hurt', 'pepe/pepe-hurt_sprite_sheet.png', {frameWidth: 610, frameHeight: 1200});
-        this.load.spritesheet('pepe-dead', 'pepe/pepe-dead_sprite_sheet.png', {frameWidth: 610, frameHeight: 1200});
+        this.load.spritesheet('player', 'pepe/spritesheet_pepe.png', {frameWidth: 610, frameHeight: 1200});
 
         // Status bars
         this.load.image('coin-status', 'status-bars/icon_coin.png');
