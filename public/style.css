@@ -3,6 +3,7 @@ body {
     padding: 0;
     color: rgba(255, 255, 255, 0.87);
     background-color: #000000;
+    font-family: 'Kablammo', Arial, Helvetica, sans-serif;
 }
 
 #app {
@@ -16,4 +17,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+p {
+    font-family: 'Boogaloo', Arial, Helvetica, sans-serif;
 }

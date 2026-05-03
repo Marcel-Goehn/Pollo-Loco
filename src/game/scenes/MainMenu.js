@@ -7,30 +7,29 @@ export class MainMenu extends Scene {
 
     create() {
         this.add.image(512, 384, 'background');
-        this.drawButton(200, 100, 'button',
-            this.getButtonStyles(),
-            'Start Game', 'Game'
-        );
-        this.drawButton(400, 100, 'button',
-            this.getButtonStyles(),
-            'Steuerung', 'Game'
-        );
-        this.drawButton(600, 100, 'button',
-            this.getButtonStyles(),
-            'Impressum', 'Game'
-        );
-    }
 
-    drawButton(x, y, element, css, text, scene) {
-        const startButton = this.add.dom(x, y, element, css, text);
-        startButton.addListener('click');
-        startButton.on('click', () => {
-            startButton.removeListener('click');
-            this.scene.start(scene);
+        // Add dom elements above canvas
+        const menuButtons = this.add.dom(512, 100).createFromCache('menu-buttons');
+        const controlsDialogContainer = this.add.dom(0, 0).createFromCache('dialog');
+
+        // Get references to dom elements
+        const startButton = document.getElementById('start-button');
+        const controlsButton = document.getElementById('controls-button');
+        const dialog = document.getElementById('overlay');
+        const closeButton = document.getElementById('close-button');
+
+
+        // Register event listeners. They do not need to be removed, phaser does it automatically
+        startButton.addEventListener('click', () => {
+            this.scene.start('Game');
         });
-    }
 
-    getButtonStyles() {
-        return 'background-color: #ffbf00; border-radius: 10px; padding: 10px 15px; font: bold 24px Kablammo; cursor: pointer; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25)';
+        controlsButton.addEventListener('click', () => {
+            dialog.showModal();
+        });
+
+        closeButton.addEventListener('click', () => {
+            dialog.close();
+        });
     }
 }
