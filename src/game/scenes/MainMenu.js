@@ -16,6 +16,7 @@ export class MainMenu extends Scene {
         const startButton = document.getElementById('start-button');
         const controlsButton = document.getElementById('controls-button');
         const dialog = document.getElementById('overlay');
+        const wrapper = document.querySelector('.wrapper');
         const closeButton = document.getElementById('close-button');
 
 
@@ -30,6 +31,12 @@ export class MainMenu extends Scene {
 
         closeButton.addEventListener('click', () => {
             dialog.close();
+        });
+
+        dialog.addEventListener('click', (e) => {
+            if(!wrapper.contains(e.target)) {
+                dialog.close();
+            }
         });
     }
 }
