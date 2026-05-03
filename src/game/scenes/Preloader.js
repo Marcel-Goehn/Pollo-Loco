@@ -17,11 +17,15 @@ export class Preloader extends Scene
         //  Load the assets for the game
         this.load.setPath('assets/img');
 
+        // Load HTML for start menu
+        this.load.html('menu-buttons', '../../html/menu-buttons.html');
+        this.load.html('dialog', '../../html/controls-dialog.html');
+
         // Background Layer
         this.load.image('air', 'background-layers/air.png');
         this.load.image('clouds', 'background-layers/clouds.png');
         this.load.image('first-layer', 'background-layers/first-layer.png');
-        this.load.image('second-layer', 'second-layer.png');
+        this.load.image('second-layer', 'background-layers/second-layer.png');
         this.load.image('third-layer', 'background-layers/third-layer.png');
 
         // Salsa Bottle

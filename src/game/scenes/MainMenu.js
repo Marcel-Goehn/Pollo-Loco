@@ -1,20 +1,35 @@
 import { Scene } from 'phaser';
 
-export class MainMenu extends Scene
-{
-    constructor ()
-    {
+export class MainMenu extends Scene {
+    constructor() {
         super('MainMenu');
     }
 
-    create ()
-    {
+    create() {
         this.add.image(512, 384, 'background');
 
-        this.input.once('pointerdown', () => {
+        // Add dom elements above canvas
+        const menuButtons = this.add.dom(512, 100).createFromCache('menu-buttons');
+        const controlsDialogContainer = this.add.dom(0, 0).createFromCache('dialog');
 
+        // Get references to dom elements
+        const startButton = document.getElementById('start-button');
+        const controlsButton = document.getElementById('controls-button');
+        const dialog = document.getElementById('overlay');
+        const closeButton = document.getElementById('close-button');
+
+
+        // Register event listeners. They do not need to be removed, phaser does it automatically
+        startButton.addEventListener('click', () => {
             this.scene.start('Game');
+        });
 
+        controlsButton.addEventListener('click', () => {
+            dialog.showModal();
+        });
+
+        closeButton.addEventListener('click', () => {
+            dialog.close();
         });
     }
 }
