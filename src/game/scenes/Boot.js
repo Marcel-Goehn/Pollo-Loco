@@ -9,7 +9,7 @@ export class Boot extends Scene
 
     preload ()
     {
-        this.load.image('background', 'assets/img/startscreen/startscreen_2.png');
+        this.load.image('background', 'assets/img/startscreen/startscreen_1.png');
         this.load.font('Kablammo', 'assets/fonts/kablammo.ttf', 'truetype');
         this.load.font('Boogaloo', 'assets/fonts/Boogaloo.ttf', 'truetype');
     }
