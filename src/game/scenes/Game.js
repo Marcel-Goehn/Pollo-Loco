@@ -23,7 +23,7 @@ export class Game extends Scene {
         // Add player (Pepe)
         this.player = this.physics.add.sprite(100, 698, 'player').setScale(0.4);
         this.player.setBounce(0.2);
-        this.player.setCollideWorldBounds(true);
+        // this.player.setCollideWorldBounds(true);
 
         // Create player animations
 
@@ -39,7 +39,7 @@ export class Game extends Scene {
             frames: this.anims.generateFrameNumbers('player', { start: 40, end: 49 }),
             frameRate: 10,
             repeat: -1
-        }) ;
+        });
 
         this.physics.add.collider(this.player, this.platform);
 
@@ -52,24 +52,32 @@ export class Game extends Scene {
     }
 
     update() {
+        const camera = this.cameras.main;
+        const speed = 6;
+
         if (this.cursors.left.isDown) {
-            console.log('left');
-            this.player.setFlipX(true);
-            this.player.setVelocityX(-300);
-            this.player.anims.play('player-walk', true);
+            this.playerWalk(true, -300);
+            camera.scrollX -= speed;
         }
         else if (this.cursors.right.isDown) {
-            console.log('right');
-            this.player.setFlipX(false);
-            this.player.setVelocityX(300);
-            this.player.anims.play('player-walk', true);
+            this.playerWalk(false, 300);
+            camera.scrollX += speed;
         }
         else if (this.cursors.up.isDown && this.player.body.touching.down) {
-            console.log('up');
             this.player.setVelocityY(-330);
         } else {
             this.player.setVelocityX(0);
             this.player.anims.play('player-idle', true);
         }
+    }
+
+    playerWalk(bool, speed) {
+        this.player.setFlipX(bool);
+        this.player.setVelocityX(speed);
+        this.player.anims.play('player-walk', true);
+    }
+
+    playerJump() {
+        this.player.setVelocityY(-330);
     }
 }
