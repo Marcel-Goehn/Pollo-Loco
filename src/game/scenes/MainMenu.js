@@ -6,10 +6,13 @@ export class MainMenu extends Scene {
     }
 
     create() {
-        this.add.image(960, 540, 'background');
+        const width = this.scale.width;
+        const height = this.scale.height;
+
+        this.add.image(width * 0.5, height * 0.5, 'background');
 
         // Add dom elements above canvas
-        const menuButtons = this.add.dom(960, 100).createFromCache('menu-buttons');
+        const menuButtons = this.add.dom(width * 0.5, 100).createFromCache('menu-buttons');
         const controlsDialogContainer = this.add.dom(0, 0).createFromCache('dialog');
 
         // Get references to dom elements
