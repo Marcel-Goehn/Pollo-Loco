@@ -12,6 +12,7 @@ export class Game extends Scene {
         this.player = null;
         this.platform = null;
         this.startedJumping = false;
+        this.longIdle = false;
     }
 
     create() {
@@ -32,7 +33,7 @@ export class Game extends Scene {
     }
 
     update() {
-        if (this.player.body.velocity.y > 0 && !this.player.body.touching.down && this.startedJumping === true) {
+        if (this.player.body.velocity.y > 0 && !this.player.body.touching.down && this.startedJumping) {
             playerFalling(this);
         }
         else if (this.cursors.up.isDown && this.player.body.touching.down) {
@@ -45,7 +46,8 @@ export class Game extends Scene {
         else if (this.cursors.right.isDown) {
             playerWalk(this, false, 300);
             updateWorldLayers(this, 'right');
-        } else {
+        } 
+        else if (!this.longIdle) {
             playerIdle(this);
         }
     }
