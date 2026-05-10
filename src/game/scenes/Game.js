@@ -3,7 +3,7 @@ import createPlayerAnimations from '../animations/player-animations';
 import createWorldLayers from '../create/world-layers';
 import createPlayer from '../create/player';
 import updateWorldLayers from '../update/world-layers';
-import { playerWalk, playerJump, playerIdle } from '../state-management/player-states';
+import { playerWalk, playerJump, playerIdle, playerFalling } from '../state-management/player-states';
 
 export class Game extends Scene {
     constructor() {
@@ -11,6 +11,8 @@ export class Game extends Scene {
         this.cursors = null;
         this.player = null;
         this.platform = null;
+        this.startedJumping = false;
+        this.longIdle = false;
     }
 
     create() {
@@ -31,7 +33,10 @@ export class Game extends Scene {
     }
 
     update() {
-        if (this.cursors.up.isDown && this.player.body.touching.down) {
+        if (this.player.body.velocity.y > 0 && !this.player.body.touching.down && this.startedJumping) {
+            playerFalling(this);
+        }
+        else if (this.cursors.up.isDown && this.player.body.touching.down) {
             playerJump(this);
         }
         else if (this.cursors.left.isDown) {
@@ -41,7 +46,8 @@ export class Game extends Scene {
         else if (this.cursors.right.isDown) {
             playerWalk(this, false, 300);
             updateWorldLayers(this, 'right');
-        } else {
+        } 
+        else if (!this.longIdle) {
             playerIdle(this);
         }
     }
