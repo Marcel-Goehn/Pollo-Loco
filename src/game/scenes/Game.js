@@ -2,7 +2,11 @@ import { Scene } from 'phaser';
 import createPlayerAnimations from '../animations/player-animations';
 import createWorldLayers from '../create/world-layers';
 import createPlayer from '../create/player';
+import { createNormalChicken } from '../create/chicken';
+import createColliders from '../collider/collisions';
+import adjustHitbox from '../hitbox/adjust-hitbox';
 import updateWorldLayers from '../update/world-layers';
+import chickenStates from '../state-management/chicken-states';
 import { playerWalk, playerJump, playerIdle, playerFalling } from '../state-management/player-states';
 
 export class Game extends Scene {
@@ -10,6 +14,7 @@ export class Game extends Scene {
         super('Game');
         this.cursors = null;
         this.player = null;
+        this.normalChicken = null;
         this.platform = null;
         this.startedJumping = false;
         this.longIdle = false;
@@ -22,8 +27,10 @@ export class Game extends Scene {
         createWorldLayers(this, width, height);
         createPlayerAnimations(this);
         createPlayer(this);
-
-        this.physics.add.collider(this.player, this.platform);
+        createNormalChicken(this);
+        createColliders(this);
+        
+        adjustHitbox(this);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -32,7 +39,18 @@ export class Game extends Scene {
         // });
     }
 
+    killChicken(player, chicken) {
+        if (player.body.touching.down && chicken.body.touching.up) {
+            chicken.disableBody(true, true);
+        }
+        else if ((player.body.touching.right && chicken.body.touching.left) || (player.body.touching.left && chicken.body.touching.right)) {
+            player.disableBody(true, true);
+        }
+    }
+
     update() {
+        chickenStates(this);
+        
         if (this.player.body.velocity.y > 0 && !this.player.body.touching.down && this.startedJumping) {
             playerFalling(this);
         }
@@ -46,7 +64,7 @@ export class Game extends Scene {
         else if (this.cursors.right.isDown) {
             playerWalk(this, false, 300);
             updateWorldLayers(this, 'right');
-        } 
+        }
         else if (!this.longIdle) {
             playerIdle(this);
         }
