@@ -6,7 +6,6 @@ import { createNormalChicken } from '../create/chicken';
 import createColliders from '../collider/collisions';
 import adjustHitbox from '../hitbox/adjust-hitbox';
 import updateWorldLayers from '../update/world-layers';
-import chickenStates from '../state-management/chicken-states';
 import { playerWalk, playerJump, playerIdle, playerFalling } from '../state-management/player-states';
 
 export class Game extends Scene {
@@ -49,8 +48,6 @@ export class Game extends Scene {
     }
 
     update() {
-        chickenStates(this);
-        
         if (this.player.body.velocity.y > 0 && !this.player.body.touching.down && this.startedJumping) {
             playerFalling(this);
         }
