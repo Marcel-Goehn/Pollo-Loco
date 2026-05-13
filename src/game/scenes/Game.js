@@ -3,6 +3,7 @@ import createPlayerAnimations from '../animations/player-animations';
 import createWorldLayers from '../create/world-layers';
 import createPlayer from '../create/player';
 import { createNormalChicken, createSmallChicken } from '../create/chicken';
+import createCollectableCoin from '../create/star';
 import createColliders from '../collider/collisions';
 import adjustHitbox from '../hitbox/adjust-hitbox';
 import updateKeyboard from '../keyboard/keyboard';
@@ -17,6 +18,7 @@ export class Game extends Scene {
         this.normalChicken = null;
         this.smallChicken = null;
         this.platform = null;
+        this.coin = null;
         this.startedJumping = false;
         this.longIdle = false;
     }
@@ -31,6 +33,7 @@ export class Game extends Scene {
         createNormalChicken(this);
         createChickenAnimations(this);
         createSmallChicken(this);
+        createCollectableCoin(this);
         createColliders(this);
 
         adjustHitbox(this);
